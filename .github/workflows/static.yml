@@ -1,0 +1,110 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+
+            - név: Gyorsítótár
+  használja: actions/cache@v4.2.4
+  vel:
+    # Fájlok, könyvtárak és helyettesítő karakterek listája a gyorsítótárazáshoz és visszaállításhoz
+    útvonal:
+    # Egy explicit kulcs a gyorsítótár visszaállításához és mentéséhez
+    kulcsfontosságú:
+    # Egy rendezett, többsoros karakterlánc, amely felsorolja az előtaggal egyező kulcsokat, amelyeket az elavult gyorsítótár visszaállítására használunk, ha a kulcshoz nem történt gyorsítótár-találat. Megjegyzés: A `cache-hit` ebben az esetben hamis értéket ad vissza.
+    visszaállítási kulcsok: # opcionális
+    # A feltöltés során nagy fájlok felosztásához használt csonkméret bájtban
+    feltöltési-chunk-size: # opcionális
+    # Opcionális logikai érték, ha engedélyezve van, lehetővé teszi a Windows futtatói számára, hogy olyan gyorsítótárakat mentsenek vagy állítsanak vissza, amelyek más platformokon visszaállíthatók vagy menthetők
+    enableCrossOsArchive: # opcionális, az alapértelmezett érték hamis
+    # A munkafolyamat meghiúsul, ha a gyorsítótár-bejegyzés nem található
+    fail-on-cache-miss: # opcionális, az alapértelmezett érték hamis
+    # Ellenőrzi, hogy létezik-e gyorsítótár-bejegyzés az adott bemenet(ek)hez (kulcs, visszaállítási kulcsok) a gyorsítótár letöltése nélkül
+    csak keresés: # opcionális, az alapértelmezett érték hamis
+    # Futtassa a post lépést a gyorsítótár mentéséhez, még akkor is, ha egy korábbi lépés sikertelen
+    mentés-always: # opcionális, az alapértelmezett érték hamis
+
+
+                      - név: Java JDK beállítása
+  használja: actions/setup-java@v5.0.0
+  vel:
+    # A beállítandó Java verzió. Egy teljes vagy több Java verziót vár. A támogatott szintaxis példáit a README fájlban találja.
+    java-verzió: # opcionális
+    # A `.java-version` fájl elérési útja. A támogatott szintaxis példáit a README fájlban találja.
+    java-version-file: # opcionális
+    # Java disztribúció. A támogatott disztribúciók listáját lásd a README fájlban.
+    elosztás:
+    # A csomag típusa (jdk, jre, jdk+fx, jre+fx)
+    java-package: # opcionális, az alapértelmezett a jdk
+    # A csomag architektúrája (alapértelmezés szerint az action runner architektúrája)
+    architektúra: # opcionális
+    # A tömörített JDK helyének elérési útja
+    jdkFile: # opcionális
+    # Állítsa be ezt az opciót, ha azt szeretné, hogy a művelet a verzióspecifikációnak megfelelő legújabb elérhető verziót keresse
+    check-latest: # opcionális
+    # A pom.xml fájlban található distributionManagement repository azonosítója. Az alapértelmezett érték a `github`.
+    szerver-azonosító: # opcionális, az alapértelmezett a github
+    # A felhasználónév környezeti változójának neve az Apache Maven repositoryhoz való hitelesítéshez. Az alapértelmezett érték $GITHUB_ACTOR
+    server-username: # opcionális, az alapértelmezett érték a GITHUB_ACTOR
+    # Környezeti változó neve a jelszóhoz vagy tokenhez az Apache Maven repository hitelesítéséhez. Az alapértelmezett érték $GITHUB_TOKEN
+    szerver-jelszó: # opcionális, az alapértelmezett a GITHUB_TOKEN
+    # A settings.xml fájl mentési helye. Az alapértelmezett érték ~/.m2.
+    beállítások-útvonal: # opcionális
+    # Felülírja a settings.xml fájlt, ha létezik. Az alapértelmezett érték „true”.
+    overwrite-settings: # opcionális, az alapértelmezett érték igaz
+    # GPG privát kulcs az importáláshoz. Az alapértelmezett érték üres karakterlánc.
+    gpg-private-key: # opcionális
+    # A GPG privát kulcs jelszavának környezeti változó neve. Az alapértelmezett érték $GPG_PASSPHRASE.
+    gpg-jelszó: # opcionális
+    # A függőségek gyorsítótárazásához használt build platform neve. Lehet "maven", "gradle" vagy "sbt".
+    gyorsítótár: # opcionális
+    # A függőségi fájl elérési útja: pom.xml, build.gradle, build.sbt stb. Ez az opció a `cache` opcióval együtt használható. Ha ez az opció nincs megadva, a művelet a teljes adattárban keresi a függőségi fájlt. Ez az opció támogatja a helyettesítő karaktereket és a fájlnevek listáját több függőség gyorsítótárazásához.
+    gyorsítótár-függőségi-útvonal: # opcionális
+    # Megoldás a munka állapotának átadására a munka közzététele lépésnek. Ez a változó nem manuális beállításra szolgál.
+    job-status: # opcionális, az alapértelmezett érték ${{ job.status }}
+    # A github.com-on tárolt verziómanifesztek lekérésekor használt hitelesítési token, például az OpenJDK Microsoft-buildjéhez. Ha ezt a műveletet a github.com-on futtatja, az alapértelmezett érték elegendő. GHES-en futtatva átadhat egy személyes hozzáférési tokent a github.com-hoz, ha sebességkorlátozást tapasztal.
+    token: # opcionális, az alapértelmezett érték ${{ github.server_url == 'https://github.com' && github.token || '' }}
+    # A Maven Toolchain azonosító neve, ha az alapértelmezett "${distribution}_${java-version}" név nem kívánatos. A támogatott szintaxis példáit lásd az Advanced Usage fájlban.
+    mvn-toolchain-id: # opcionális
+    # A Maven Toolchain gyártójának neve, ha az alapértelmezett "${distribution}" név nem kívánatos. A támogatott szintaxis példáit lásd az Advanced Usage fájlban.
+    mvn-toolchain-szállító: # opcionális
+          
