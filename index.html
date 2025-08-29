@@ -44,6 +44,7 @@
           </div>
         </div>
         <div class="hero-media">
+          <!-- háttérképként is megadható CSS-ben, de ide lehet képet betenni -->
           <img src="images/hero.jpg" alt="Burkolás munka" />
         </div>
       </div>
@@ -164,6 +165,7 @@
         <div class="contact-card">
           <h3>Cím</h3>
           <p>Budapest (helyszín egyeztetése a pontos címhez)</p>
+          <!-- Google Maps beágyazás: cseréld a src URL-t a pontos koordinátákra/címre -->
           <div class="map-wrap">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
@@ -176,18 +178,21 @@
   <footer class="site-footer">
     <div class="container">
       <div>© <span id="year"></span> Sal Burkolás &amp; Gipszkarton — Minden jog fenntartva.</div>
-      <div class="small">Készítette: Sal — <a href="mailto:info@peldaadomain.hu">info@peldaadomain.hu</a></div>
+      <div class="small">Készítette: (cégnév) — <a href="mailto:info@peldaadomain.hu">info@peldaadomain.hu</a></div>
     </div>
   </footer>
 
+  <!-- Lightbox modal -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <button class="lb-close" id="lbClose" aria-label="Bezárás">&times;</button>
     <img id="lbImg" src="" alt="">
   </div>
 
 <script>
+  // év
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // mobil menü
   const navToggle = document.getElementById('navToggle');
   const mainNav = document.getElementById('mainNav');
   navToggle.addEventListener('click', () => {
@@ -195,6 +200,7 @@
     navToggle.classList.toggle('open');
   });
 
+  // lightbox gallery
   const galleryItems = document.querySelectorAll('.gallery-item');
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lbImg');
@@ -222,6 +228,7 @@
     }
   });
 
+  // close nav when clicking a link (mobile)
   document.querySelectorAll('.nav a').forEach(a=>{
     a.addEventListener('click', ()=> {
       mainNav.classList.remove('open');
